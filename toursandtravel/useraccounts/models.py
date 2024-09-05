@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.contrib.auth.models import Permission
 from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
-
+import uuid
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, password2=None,**extra_fields):
@@ -33,6 +33,7 @@ class CustomGroup(models.Model):
         return self.name
 
 class User(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
     GENDER_CHOICES = [
     ('Male', 'Male'),
     ('Female', 'Female')
