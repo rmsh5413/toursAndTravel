@@ -61,6 +61,8 @@ class HolidaysPackages(BaseModel):
     activity_duration=models.CharField(max_length=255)
     max_altitude=models.CharField(max_length=255)
     youtubeUrl=models.URLField(null=True, blank=True)
+    mapUrl=models.URLField(max_length=1000,null=True, blank=True)
+    pdfManual=models.FileField(upload_to='holidaypackagespdf', blank=True, null=True)
 
     def __str__(self):
         return self.name
