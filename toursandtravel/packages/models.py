@@ -12,7 +12,7 @@ class HolidaysPackagesCategory(BaseModel):
     slug = AutoSlugField(populate_from='name', unique=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='holidaypackagescategory', blank=True, null=True)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class HolidaysPackages(BaseModel):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='holidaypackages', blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.name
@@ -45,7 +45,7 @@ class HolidaysPackagesItinerary(BaseModel):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='holidaypackagesitinerary', blank=True, null=True)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.title
@@ -91,7 +91,7 @@ class HolidaysPackagesInclusion(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='inclusions',null=True, blank=True)
     ordering=models.PositiveBigIntegerField()
     detail = models.CharField(max_length=505)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.detail
@@ -104,7 +104,7 @@ class HolidaysPackagesExclusion(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='exclusions',null=True, blank=True)
     ordering=models.PositiveBigIntegerField()
     detail = models.CharField(max_length=505)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.detail
@@ -120,7 +120,7 @@ class HolidaysPackagesNotice(BaseModel):
     ordering=models.PositiveBigIntegerField()
     title=models.CharField(max_length=255)
     description = RichTextField()
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.title
@@ -135,7 +135,7 @@ class HolidaysPackagesDates(BaseModel):
     ordering=models.PositiveBigIntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
-    is_active = models.BooleanField(default=True)
+    
 
     
     class Meta:
@@ -147,7 +147,7 @@ class HolidaysPackagesFaq(BaseModel):
     ordering=models.PositiveBigIntegerField()
     question = models.CharField(max_length=255)
     answer = models.TextField()
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.question
@@ -161,7 +161,7 @@ class HolidaysPackagesComments(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',null=True, blank=True)
     comment = models.TextField()
     # review = models.PositiveIntegerField(validators =[MaxValueValidator(5)])
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.comment
@@ -175,10 +175,31 @@ class HolidaysPackagesHighlights(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='highlights',null=True, blank=True)
     ordering=models.PositiveBigIntegerField()
     detail = models.CharField(max_length=500)
-    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.detail
     
+    class Meta:
+        ordering = ['ordering']
+
+
+
+class HolidaysPackagesGallery(BaseModel):
+    package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='gallery',null=True, blank=True)
+    ordering=models.PositiveBigIntegerField()
+    image = models.ImageField(upload_to='holidaypackagesgallery', blank=True, null=True)
+    
+
+    class Meta:
+        ordering = ['ordering']
+
+
+class HolidaysPackagesVideos(BaseModel):
+    package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='videos',null=True, blank=True)
+    ordering=models.PositiveBigIntegerField()
+    video = models.FileField(upload_to='holidaypackagesvideos', blank=True, null=True)
+    
+
     class Meta:
         ordering = ['ordering']
