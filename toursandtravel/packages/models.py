@@ -9,6 +9,7 @@ MEAL = (
     ('Breakfast', 'Breakfast'),
     ('Lunch', 'Lunch'),
     ('Dinner', 'Dinner'),
+    ('All', 'All')
 )
 
 SEASONS = (
@@ -25,9 +26,24 @@ ACCOMMODATION = (
     ('Cottage', 'Cottage'),
     ('Villa', 'Villa'),
     ('Camp', 'Camp'),
+
 )
+
+
+class HolidaysPackagesType(BaseModel):
+    name = models.CharField(max_length=255)
+    ordering=models.PositiveBigIntegerField()
+    slug = AutoSlugField(populate_from='name', unique=True)
+    image = models.ImageField(upload_to='holidaypackagestype', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ['ordering']
     # existing code
 class HolidaysPackagesCategory(BaseModel):
+    type = models.ForeignKey(HolidaysPackagesType, on_delete=models.CASCADE, related_name='categories', null=True, blank=True)
     name = models.CharField(max_length=255)
     ordering=models.PositiveBigIntegerField()
     slug = AutoSlugField(populate_from='name', unique=True)
@@ -43,7 +59,8 @@ class HolidaysPackagesCategory(BaseModel):
 
 
 class HolidaysPackages(BaseModel):
-    category = models.ForeignKey(HolidaysPackagesCategory, on_delete=models.CASCADE, related_name='packages')
+    packagetype = models.ForeignKey(HolidaysPackagesType, on_delete=models.CASCADE, related_name='packagecategories',null=  True, blank=True)
+    category = models.ForeignKey(HolidaysPackagesCategory, on_delete=models.CASCADE, related_name='packages',null=  True, blank=True)
     ordering=models.PositiveBigIntegerField()
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name', unique=True)
