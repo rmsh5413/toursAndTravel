@@ -3,6 +3,8 @@ from basemodel.models import BaseModel
 from useraccounts.models import User
 from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
 
 MEAL = (
@@ -214,6 +216,11 @@ class HolidaysPackagesComments(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',null=True, blank=True)
     comment = models.TextField()
+    approve=models.BooleanField(default=False)
+    rating = models.FloatField( validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
     # review = models.PositiveIntegerField(validators =[MaxValueValidator(5)])
     
 
