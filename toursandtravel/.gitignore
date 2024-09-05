@@ -1,0 +1,10 @@
+__pycache__/
+.venv/
+.env/
+staticfiles/
+.staticfiles
+
+# Ignore Django migration-related logs or temporary files
+*.log
+*.tmp
+db.sqlite3
