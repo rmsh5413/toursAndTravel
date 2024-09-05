@@ -54,6 +54,39 @@ class HolidaysPackagesItinerary(BaseModel):
         ordering = ['ordering']
 
 
+
+class PackagesAccommodation(BaseModel):
+    itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='accommodation',null=True, blank=True)
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['created_at']
+
+class PackagesMeals(BaseModel):
+    itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='meals',null=True, blank=True)
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['created_at']
+
+class PackagesActivities(BaseModel):
+    itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='activities',null=True, blank=True)
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['created_at']
+    
+
+
 class HolidaysPackagesInclusion(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='inclusions',null=True, blank=True)
     ordering=models.PositiveBigIntegerField()
