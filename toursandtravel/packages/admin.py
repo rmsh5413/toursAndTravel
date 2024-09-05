@@ -30,17 +30,6 @@ class HolidaysPackagesItineraryAdmin(admin.ModelAdmin):
 # admin.site.register(PackagesMeals)
 # admin.site.register(PackagesActivities)
 
-from django.contrib import admin
-from .models import (
-    HolidaysPackages, 
-    HolidaysPackagesInclusion, 
-    HolidaysPackagesExclusion, 
-    HolidaysPackagesNotice, 
-    HolidaysPackagesDates, 
-    HolidaysPackagesFaq, 
-    HolidaysPackagesComments, 
-    HolidaysPackagesHighlights
-)
 
 class HolidaysPackagesInclusionInline(admin.TabularInline):
     model = HolidaysPackagesInclusion
