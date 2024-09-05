@@ -11,6 +11,10 @@ MEAL = (
     ('Dinner', 'Dinner'),
     ('All', 'All')
 )
+INTERNATIONALORDOMESTIC = (
+    ('International', 'International'),
+    ('Domestic', 'Domestic')
+)
 
 SEASONS = (
     ('Spring', 'Spring'),
@@ -26,13 +30,12 @@ ACCOMMODATION = (
     ('Cottage', 'Cottage'),
     ('Villa', 'Villa'),
     ('Camp', 'Camp'),
-
 )
 
 
 class HolidaysPackagesType(BaseModel):
     name = models.CharField(max_length=255)
-    ordering=models.PositiveBigIntegerField()
+    ordering = models.PositiveBigIntegerField()
     slug = AutoSlugField(populate_from='name', unique=True)
     image = models.ImageField(upload_to='holidaypackagestype', blank=True, null=True)
 
@@ -47,10 +50,9 @@ class HolidaysPackagesCategory(BaseModel):
     name = models.CharField(max_length=255)
     ordering=models.PositiveBigIntegerField()
     slug = AutoSlugField(populate_from='name', unique=True)
-    description = RichTextField()
-    equipment = RichTextField()
     image = models.ImageField(upload_to='holidaypackagescategory', blank=True, null=True)
     
+
     def __str__(self):
         return self.name
     
@@ -74,13 +76,15 @@ class HolidaysPackages(BaseModel):
     group_size=models.CharField(max_length=255)
     season=models.CharField(max_length=255, choices=SEASONS)
     meals = models.CharField(max_length=255, choices=MEAL)
+    select_package_type=models.CharField(max_length=255, choices=INTERNATIONALORDOMESTIC)
     accommodations=models.CharField(max_length=255,choices=ACCOMMODATION)
     activity_duration=models.CharField(max_length=255)
     max_altitude=models.CharField(max_length=255)
     youtubeUrl=models.URLField(null=True, blank=True)
     mapUrl=models.URLField(max_length=1000,null=True, blank=True)
     pdfManual=models.FileField(upload_to='holidaypackagespdf', blank=True, null=True)
-
+    description = RichTextField()
+    equipment = RichTextField()
     def __str__(self):
         return self.name
     
