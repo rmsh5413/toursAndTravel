@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     # Third party apps
     'useraccounts',
+    'packages',
+    'basemodel',
 
        # third party
     'corsheaders',
