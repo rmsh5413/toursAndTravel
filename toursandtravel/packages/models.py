@@ -127,6 +127,7 @@ class HolidaysPackagesComments(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',null=True, blank=True)
     comment = models.TextField()
+    # review = models.PositiveIntegerField(validators =[MaxValueValidator(5)])
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -134,3 +135,17 @@ class HolidaysPackagesComments(BaseModel):
 
     class Meta:
         ordering = ['-created_at']
+
+
+
+class HolidaysPackagesHighlights(BaseModel):
+    package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='highlights',null=True, blank=True)
+    ordering=models.PositiveBigIntegerField()
+    detail = models.CharField(max_length=500)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.detail
+    
+    class Meta:
+        ordering = ['ordering']
