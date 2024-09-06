@@ -248,19 +248,17 @@ class HolidaysPackagesHighlights(BaseModel):
 
 class HolidaysPackagesGallery(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='gallery',null=True, blank=True)
-    ordering=models.PositiveBigIntegerField()
     image = models.ImageField(upload_to='holidaypackagesgallery', blank=True, null=True)
     
 
     class Meta:
-        ordering = ['ordering']
+        ordering = ['id']
 
 
 class HolidaysPackagesVideos(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='videos',null=True, blank=True)
-    ordering=models.PositiveBigIntegerField()
     video = models.FileField(upload_to='holidaypackagesvideos', blank=True, null=True)
     
 
     class Meta:
-        ordering = ['ordering']
+        ordering = ['id']
