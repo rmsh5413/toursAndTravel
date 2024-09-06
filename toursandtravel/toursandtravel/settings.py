@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'basemodel',
     'itinerary',
     'blog',
+    'aboutus',
 
        # third party
     'corsheaders',
