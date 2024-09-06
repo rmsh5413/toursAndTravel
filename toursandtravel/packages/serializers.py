@@ -54,7 +54,7 @@ class HolidaysPackagesNoticeSerializer(serializers.ModelSerializer):
 class HolidaysPackagesDatesSerializer(serializers.ModelSerializer):
     class Meta:
         model = HolidaysPackagesDates
-        fields = ['id', 'ordering', 'start_date', 'end_date']
+        fields = ['id', 'start_date', 'end_date']
 
 class HolidaysPackagesSerializer(serializers.ModelSerializer):
     faqs = HolidaysPackagesFaqSerializer(many=True, required=False)
@@ -279,7 +279,7 @@ class HolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HolidaysPackagesItinerary
-        fields = ['id', 'ordering', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
+        fields = ['id', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
 
 # class HolidaysPackagesSerializer(serializers.ModelSerializer):
 #     itinerary = HolidaysPackagesItinerarySerializer(many=True, required=False)

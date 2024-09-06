@@ -96,7 +96,6 @@ class HolidaysPackages(BaseModel):
     
 class HolidaysPackagesItinerary(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='itinerary',null=True, blank=True)
-    ordering=models.PositiveBigIntegerField()
     day = models.PositiveIntegerField()
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -107,7 +106,7 @@ class HolidaysPackagesItinerary(BaseModel):
         return self.title
     
     class Meta:
-        ordering = ['ordering']
+        ordering = ['day']
 
 
 
@@ -191,14 +190,13 @@ class HolidaysPackagesNotice(BaseModel):
 
 class HolidaysPackagesDates(BaseModel):
     package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='dates',null=True, blank=True) 
-    ordering=models.PositiveBigIntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
     
 
     
     class Meta:
-        ordering = ['ordering']
+        ordering = ['start_date']
 
 
 class HolidaysPackagesFaq(BaseModel):
