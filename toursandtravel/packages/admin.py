@@ -6,6 +6,8 @@ from .models import *
 
 admin.site.register(HolidaysPackagesCategory)
 admin.site.register(HolidaysPackagesType)
+admin.site.register(Countries)
+admin.site.register(Cities)
 # admin.site.register(HolidaysPackagesItinerary)
 admin.site.register(HolidaysPackagesGallery)
 class PackagesAccommodationInline(admin.TabularInline):

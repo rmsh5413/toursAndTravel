@@ -69,7 +69,7 @@ class HolidaysPackagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = HolidaysPackages
         fields = [
-            'id', 'packagetype', 'category', 'ordering', 'name', 'slug', 'description',
+            'id','country','city', 'packagetype', 'category', 'ordering', 'name', 'slug', 'description',
             'image', 'price', 'destination', 'duration', 'start_point', 'end_point',
             'group_size', 'season', 'meals', 'select_package_type', 'accommodations',
             'activity_duration', 'max_altitude', 'youtubeUrl', 'mapUrl', 'pdfManual',
@@ -124,7 +124,7 @@ class UpdateHolidaysPackagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = HolidaysPackages
         fields = [
-            'id', 'packagetype', 'category', 'ordering', 'name', 'slug', 'description',
+            'id','country','city', 'packagetype', 'category', 'ordering', 'name', 'slug', 'description',
             'image', 'price', 'destination', 'duration', 'start_point', 'end_point',
             'group_size', 'season', 'meals', 'select_package_type', 'accommodations',
             'activity_duration', 'max_altitude', 'youtubeUrl', 'mapUrl', 'pdfManual',
@@ -134,6 +134,8 @@ class UpdateHolidaysPackagesSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         # Update the HolidaysPackages fields
         instance.name = validated_data.get('name', instance.name)
+        instance.country = validated_data.get('country', instance.country)
+        instance.city = validated_data.get('city', instance.city)
         instance.image = validated_data.get('image', instance.image)
         instance.description = validated_data.get('description', instance.description)
         instance.price = validated_data.get('price', instance.price)
