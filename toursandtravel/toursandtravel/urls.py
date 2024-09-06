@@ -28,9 +28,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="E-Commerce API",
+        title="Tour and Travel API",
         default_version='v1',
-        description="E-Commerce API",
+        description="Tour and Travel  API",
         terms_of_service="https://www.yourapp.com/terms/",
         contact=openapi.Contact(email="abcd@gmail.com"),
         license=openapi.License(name="Your License"),
