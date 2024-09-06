@@ -112,6 +112,7 @@ class HolidaysPackagesItinerary(BaseModel):
 
 
 class PackagesAccommodation(BaseModel):
+    packages=models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='packagesaccommodation',null=True, blank=True)
     itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='accommodation',null=True, blank=True)
     title = models.CharField(max_length=255)
 
@@ -122,6 +123,7 @@ class PackagesAccommodation(BaseModel):
         ordering = ['created_at']
 
 class PackagesMeals(BaseModel):
+    packages=models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='packagesmeals',null=True, blank=True)
     itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='meals',null=True, blank=True)
     title = models.CharField(max_length=255)
 
@@ -132,6 +134,7 @@ class PackagesMeals(BaseModel):
         ordering = ['created_at']
 
 class PackagesActivities(BaseModel):
+    packages=models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='packagesactivities',null=True, blank=True)
     itinerary=models.ForeignKey(HolidaysPackagesItinerary, on_delete=models.CASCADE, related_name='activities',null=True, blank=True)
     title = models.CharField(max_length=255)
 
