@@ -257,29 +257,29 @@ from .models import (
     PackagesActivities
 )
 
-class PackagesAccommodationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PackagesAccommodation
-        fields = ['id', 'title']
+# class PackagesAccommodationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PackagesAccommodation
+#         fields = ['id', 'title']
 
-class PackagesMealsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PackagesMeals
-        fields = ['id', 'title']
+# class PackagesMealsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PackagesMeals
+#         fields = ['id', 'title']
 
-class PackagesActivitiesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PackagesActivities
-        fields = ['id', 'title']
+# class PackagesActivitiesSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PackagesActivities
+#         fields = ['id', 'title']
 
-class HolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
-    accommodation = PackagesAccommodationSerializer(many=True, required=False)
-    meals = PackagesMealsSerializer(many=True, required=False)
-    activities = PackagesActivitiesSerializer(many=True, required=False)
+# class HolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
+#     accommodation = PackagesAccommodationSerializer(many=True, required=False)
+#     meals = PackagesMealsSerializer(many=True, required=False)
+#     activities = PackagesActivitiesSerializer(many=True, required=False)
 
-    class Meta:
-        model = HolidaysPackagesItinerary
-        fields = ['id', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
+#     class Meta:
+#         model = HolidaysPackagesItinerary
+#         fields = ['id', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
 
 # class HolidaysPackagesSerializer(serializers.ModelSerializer):
 #     itinerary = HolidaysPackagesItinerarySerializer(many=True, required=False)
@@ -382,7 +382,7 @@ class HolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HolidaysPackagesItinerary
-        fields = ['id', 'ordering', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
+        fields = ['id', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
 
     def create(self, validated_data):
         accommodations_data = validated_data.pop('accommodation', [])
@@ -411,7 +411,7 @@ class UpdateHolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HolidaysPackagesItinerary
-        fields = ['id', 'ordering', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
+        fields = ['id', 'day', 'title', 'description', 'image', 'accommodation', 'meals', 'activities']
 
 
     def update(self, instance, validated_data):
@@ -419,7 +419,7 @@ class UpdateHolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
         meals_data = validated_data.pop('meals', [])
         activities_data = validated_data.pop('activities', [])
         
-        instance.ordering = validated_data.get('ordering', instance.ordering)
+        # instance.ordering = validated_data.get('ordering', instance.ordering)
         instance.day = validated_data.get('day', instance.day)
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.description)

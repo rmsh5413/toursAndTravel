@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.contrib.auth.models import Permission
 from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
-import uuid
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, password2=None,**extra_fields):
@@ -20,20 +20,8 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_admin', True)
         return self.create_user(email, name, password, **extra_fields)
-
-
-
-from django.contrib.auth.models import Permission
-
-class CustomGroup(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    permissions = models.ManyToManyField(Permission, blank=True)
-
-    def __str__(self):
-        return self.name
-
+    
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
     GENDER_CHOICES = [
     ('Male', 'Male'),
     ('Female', 'Female')
@@ -56,20 +44,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     country = models.CharField(max_length=20, choices=COUNTRY_CHOICES,default='Dubai')
     name = models.CharField(max_length=200)
     dateofbirth = models.DateField(blank=True, null=True) 
-    gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=20, choices=GENDER_CHOICES,default='Male',blank=True, null=True)
     username = models.CharField(max_length=200,null=True, blank=True)
     is_user = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     is_delivery_agent = models.BooleanField(default=False)
     is_vendor = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)  
+    is_active = models.BooleanField(default=True)
     phone_No = models.CharField(max_length=150)
+    googleavatar = models.CharField(max_length=1050, null=True, blank=True)
     avatar = models.FileField(upload_to="avatarimage/", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    group = models.ForeignKey(CustomGroup, on_delete=models.SET_NULL, null=True, blank=True)  # Use ForeignKey instead of ManyToManyField
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -115,8 +103,6 @@ class VendorData(models.Model):
     about_company = models.TextField()
     def __str__(self):
         return f"Verification for {self.user.name}"
-
-
 
 
 

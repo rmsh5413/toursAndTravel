@@ -5,7 +5,7 @@ from useraccounts.views import (UserLoginView,
                             UserChangePasswordView,
                             SendPasswordResetEmailView,
                             UserPasswordResetView,
-                            LogoutView,OTPValidation,ExchangeCodeForTokenView,VerifyOTPAPIView,
+                            LogoutView,OTPValidation,VerifyOTPAPIView,
                             FacebookExchangeCodeForTokenView,UserDeleteAPIView,ResendOTPAPIView
                             )    
 
@@ -33,8 +33,8 @@ urlpatterns = [
     path('delete/', UserDeleteAPIView.as_view(), name='user-delete'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('auth/google/', ExchangeCodeForTokenView.as_view(), name='exchange_code_for_token'),
-    path('auth/facebook/', FacebookExchangeCodeForTokenView.as_view(), name='facebook_login'),
+    # path('auth/google/', ExchangeCodeForTokenView.as_view(), name='exchange_code_for_token'),
+    # path('auth/facebook/', FacebookExchangeCodeForTokenView.as_view(), name='facebook_login'),
 
     # path('auth/google/', GoogleLogin.as_view(), name='google_login'),
 ]

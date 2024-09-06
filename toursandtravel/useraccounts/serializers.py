@@ -10,14 +10,14 @@ from django.utils import timezone
 
 
 
-domain = "http://192.168.1.126:8000"
+domain = "http://127.0.0.1:8000"
 
 class UserSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField('get_image_url')
 
     class Meta:
         model = User
-        fields = ['id', 'name','email','phone_No','avatar','dateofbirth','gender','country']
+        fields = ['id', 'name','email','phone_No','avatar','googleavatar','dateofbirth','gender','country']
 
 
     def get_image_url(self, obj):
@@ -154,7 +154,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ['id', 'email', 'name','phone_No','avatar','dateofbirth','gender','country']
+    fields = ['id', 'email', 'name','phone_No','avatar','googleavatar','dateofbirth','gender','country']
 
 
 class UserChangePasswordSerializer(serializers.Serializer):
