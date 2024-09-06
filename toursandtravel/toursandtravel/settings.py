@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'drf_yasg',
                 
     #  ckeditor
-    'ckeditor',
+    'django_ckeditor_5',
 
     'django.contrib.sites',  # Required by django-allauth
     'allauth',
