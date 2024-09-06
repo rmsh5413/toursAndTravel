@@ -7,4 +7,17 @@ urlpatterns = [
     path('categories/detail/<uuid:pk>/', HolidaysPackagesCategoryDetail.as_view(), name='category_detail'),
     path('categories/update/<uuid:pk>/', HolidaysPackagesCategoryUpdate.as_view(), name='category_update'),
     path('categories/delete/<uuid:pk>/', HolidaysPackagesCategoryDelete.as_view(), name='category_delete'),
+
+    path('holidays-packages/<uuid:pk>/', HolidaysPackagesUpdateView.as_view(), name='category_delete'),
+    path('holidays-packages/', HolidaysPackagesCreateView.as_view(), name='holidays-packages-create'),
+    path('holidays-packages/delete/<uuid:pk>/', HolidaysPackagesDeleteView.as_view(), name='holidays-packages-delete'),
+
+
+    path('itinerary/<uuid:pk>/', HolidaysPackagesItineraryUpdateView.as_view(), name='holidays-packages-update'),
+    path('itinerary/<uuid:pk>/', HolidaysPackageItinerarysDeleteView.as_view(), name='holidays-packages-delete'),
+    path('itinerary', HolidaysPackagesItineraryView.as_view(), name='category_delete'),
+    # path('itinerary/<uuid:pk>/', HolidaysPackagesItineraryView.as_view(), name='itinerary-update'),
+
+
+
 ]

@@ -26,7 +26,7 @@ class HolidaysPackagesCategoryList(generics.ListAPIView):
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
 
-class HolidaysPackagesCategoryCreate(generics.CreateAPIView):
+class HolidaysPackagesCategoryCreate(generics.ListCreateAPIView):
     queryset = HolidaysPackagesCategory.objects.all()
     serializer_class = HolidaysPackagesCategorySerializer
     permission_classes = [IsAuthenticated]
@@ -107,3 +107,114 @@ class HolidaysPackagesCategoryDelete(generics.DestroyAPIView):
                 "error": "Failed to delete category", 
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import HolidaysPackagesSerializer
+
+class HolidaysPackagesCreateView(APIView):
+    serializer_class = HolidaysPackagesSerializer
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer = HolidaysPackagesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "success": "Package created successfully",
+                "data": serializer.data
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+
+class HolidaysPackagesUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = HolidaysPackages.objects.all()
+    serializer_class = UpdateHolidaysPackagesSerializer
+    lookup_field = 'pk'
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "success": "Package updated successfully",
+                "data": serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class HolidaysPackagesDeleteView(generics.DestroyAPIView):
+    queryset = HolidaysPackages.objects.all()
+    serializer_class = UpdateHolidaysPackagesSerializer
+    lookup_field = 'pk'  # or 'id' if you are using 'id' in URLs
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({
+            "success": "Package deleted successfully"
+        }, status=status.HTTP_204_NO_CONTENT)
+    
+
+from rest_framework import generics
+from .models import HolidaysPackages
+from .serializers import HolidaysPackagesSerializer
+
+class HolidaysPackagesItineraryUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = HolidaysPackagesItinerary.objects.all()
+    serializer_class = UpdateHolidaysPackagesItinerarySerializer
+    lookup_field = 'pk'
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "success": "Itinerary updated successfully",
+                "data": serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class HolidaysPackageItinerarysDeleteView(generics.DestroyAPIView):
+    queryset = HolidaysPackagesItinerary.objects.all()
+    serializer_class = UpdateHolidaysPackagesItinerarySerializer
+    lookup_field = 'pk'
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({
+            "success": "Package Itinerary deleted successfully"
+        }, status=status.HTTP_204_NO_CONTENT)
+    
+
+class HolidaysPackagesItineraryView(generics.ListCreateAPIView):
+    queryset = HolidaysPackagesItinerary.objects.all()
+    serializer_class = HolidaysPackagesItinerarySerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = HolidaysPackagesItinerarySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "success": "Package Itinerary created successfully",
+                "data": serializer.data
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class 
+
+
+# from rest_framework import generics
+# from .models import HolidaysPackagesItinerary
+# from .serializers import HolidaysPackagesItinerarySerializer
+
+# class HolidaysPackagesItineraryView(generics.CreateAPIView, generics.UpdateAPIView):
+#     queryset = HolidaysPackagesItinerary.objects.all()
+#     serializer_class = HolidaysPackagesItinerarySerializer
+#     lookup_field = 'pk'

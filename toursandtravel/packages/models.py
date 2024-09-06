@@ -202,7 +202,7 @@ class HolidaysPackagesDates(BaseModel):
 
 
 class HolidaysPackagesFaq(BaseModel):
-    package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='bookings',null=True, blank=True)
+    package = models.ForeignKey(HolidaysPackages, on_delete=models.CASCADE, related_name='faqs',null=True, blank=True)
     ordering=models.PositiveBigIntegerField()
     question = models.CharField(max_length=255)
     answer = models.TextField()

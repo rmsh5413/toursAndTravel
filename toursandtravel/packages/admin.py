@@ -5,7 +5,9 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(HolidaysPackagesCategory)
-
+admin.site.register(HolidaysPackagesType)
+# admin.site.register(HolidaysPackagesItinerary)
+admin.site.register(HolidaysPackagesGallery)
 class PackagesAccommodationInline(admin.TabularInline):
     model = PackagesAccommodation
     extra = 1  # Number of extra forms to display
