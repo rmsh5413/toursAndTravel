@@ -44,6 +44,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/user/',include('useraccounts.urls')),
     path('api/v1/packages/',include('packages.urls')),
+    path('api/v1/blog/',include('blog.urls')),
     #auth
     # path('accounts/', include('allauth.urls')),
     # path('auth/', include('dj_rest_auth.urls')),
@@ -51,5 +52,6 @@ urlpatterns = [
     #documentation
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 
 
