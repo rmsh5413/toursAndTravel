@@ -455,3 +455,9 @@ class UpdateHolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
                 PackagesActivities.objects.create(itinerary=instance, **activity_data)
 
         return instance
+
+
+class HolidaysPackagesTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesType
+        fields = '__all__'
