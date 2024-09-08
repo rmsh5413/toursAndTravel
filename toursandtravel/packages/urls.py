@@ -45,4 +45,7 @@ urlpatterns = [
 
     # HolidaysPackagesDates
     path('dates/delete/<uuid:pk>/', HolidaysPackagesDatesDelete.as_view(), name='dates_delete'),
+
+    # HolidaysPackagesFaqDelete
+    path('faq/delete/<uuid:pk>/', HolidaysPackagesFaqDelete.as_view(), name='faq_delete'),
 ]
