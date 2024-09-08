@@ -43,4 +43,6 @@ urlpatterns = [
     # HolidaysPackagesNoticeDelete
     path('notice/delete/<uuid:pk>/', HolidaysPackagesNoticeDelete.as_view(), name='notice_delete'),
 
+    # HolidaysPackagesDates
+    path('dates/delete/<uuid:pk>/', HolidaysPackagesDatesDelete.as_view(), name='dates_delete'),
 ]
