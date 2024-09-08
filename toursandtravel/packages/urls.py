@@ -37,4 +37,7 @@ urlpatterns = [
     # HolidaysPackagesInclusionDelete
     path('inclusion/delete/<uuid:pk>/', HolidaysPackagesInclusionDelete.as_view(), name='inclusion_delete'),
 
+    # HolidaysPackagesExclusionDelete
+    path('exclusion/delete/<uuid:pk>/', HolidaysPackagesExclusionDelete.as_view(), name='exclusion_delete'),
+
 ]
