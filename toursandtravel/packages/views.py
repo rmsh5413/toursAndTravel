@@ -562,3 +562,25 @@ class HolidaysPackagesCommentsDelete(generics.DestroyAPIView):
                 "error": "Failed to delete comment", 
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+class HolidaysPackagesHighlightsDelete(generics.DestroyAPIView):
+    queryset = HolidaysPackagesHighlights.objects.all()
+    serializer_class = HolidaysPackagesHighlightsSerializer
+    permission_classes = [IsAuthenticated]
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response({
+                "success": "Highlights deleted successfully"
+            }, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({
+                "error": "Failed to delete highlights", 
+                "message": str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+

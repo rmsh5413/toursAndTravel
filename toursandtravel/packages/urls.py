@@ -55,4 +55,7 @@ urlpatterns = [
     path('comments/detail/<uuid:pk>/', HolidaysPackagesCommentsDetail.as_view(), name='comments_detail'),
     path('comments/delete/<uuid:pk>/', HolidaysPackagesCommentsDelete.as_view(), name='comments_delete'),
 
+    # HolidaysPackagesHighlightsDelete
+    path('highlights/delete/<uuid:pk>/', HolidaysPackagesHighlightsDelete.as_view(), name='highlights_delete'),
+
 ]
