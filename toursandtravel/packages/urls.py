@@ -34,6 +34,7 @@ urlpatterns = [
     # PackagesActivitiesDelete
     path('activities/delete/<uuid:pk>/', PackagesActivitiesDelete.as_view(), name='activities_delete'),
 
-
+    # HolidaysPackagesInclusionDelete
+    path('inclusion/delete/<uuid:pk>/', HolidaysPackagesInclusionDelete.as_view(), name='inclusion_delete'),
 
 ]
