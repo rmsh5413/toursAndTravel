@@ -8,3 +8,6 @@ staticfiles/
 *.log
 *.tmp
 db.sqlite3
+
+# mesia
+media/

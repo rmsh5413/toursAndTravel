@@ -35,11 +35,3 @@ class VendorDataAdmin(admin.ModelAdmin):
 admin.site.register(VendorData,VendorDataAdmin)
 
 
-from django.contrib import admin
-from .models import CustomGroup
-
-class CustomGroupAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    filter_horizontal = ('permissions',)
-
-admin.site.register(CustomGroup, CustomGroupAdmin)

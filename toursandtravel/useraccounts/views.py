@@ -194,8 +194,6 @@ class UserLoginView(APIView):
             }, status=status.HTTP_404_NOT_FOUND)
 
 
-
-
 class UserProfileView(APIView):
   # renderer_classes = [UserRenderer]
   permission_classes = [IsAuthenticated]
@@ -409,6 +407,11 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 
 # your_app/views.py
 
+
+
+import requests
+
+
 class FacebookExchangeCodeForTokenView(APIView):
     def post(self, request, *args, **kwargs):
         code = request.data.get('code')
@@ -441,44 +444,6 @@ class FacebookExchangeCodeForTokenView(APIView):
 
         # Handle the user info and tokens as needed (e.g., create user, store tokens)
         return Response({"access_token": access_token, "user_info": user_info}, status=status.HTTP_200_OK)
-
-import requests
-# this is it
-# class FacebookExchangeCodeForTokenView(APIView):
-#     def post(self, request, *args, **kwargs):
-#         code = request.data.get('code')
-#         if not code:
-#             return Response({"message": "Authorization code is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-#         # Exchange code for access_token
-#         token_url = 'https://graph.facebook.com/v12.0/oauth/access_token'
-#         data = {
-#             'client_id': 'YOUR_FACEBOOK_APP_ID',
-#             'redirect_uri': 'http://localhost:8000/auth/facebook/callback/',  # This should match your frontend's redirect URI
-#             'client_secret': 'YOUR_FACEBOOK_APP_SECRET',
-#             'code': code
-#         }
-#         token_response = requests.get(token_url, params=data)
-#         token_data = token_response.json()
-
-#         access_token = token_data.get('access_token')
-#         if not access_token:
-#             return Response({"message": "Failed to obtain access token"}, status=status.HTTP_400_BAD_REQUEST)
-
-#         # Optionally, get user info
-#         user_info_url = 'https://graph.facebook.com/me'
-#         user_info_params = {
-#             'fields': 'id,name,email',
-#             'access_token': access_token
-#         }
-#         user_info_response = requests.get(user_info_url, params=user_info_params)
-#         user_info = user_info_response.json()
-
-#         # Handle the user info and tokens as needed (e.g., create user, store tokens)
-#         return Response({"access_token": access_token, "user_info": user_info}, status=status.HTTP_200_OK)
-
-
-
 
 # facebookmight helop
 
@@ -518,47 +483,69 @@ import requests
 
 
 
-class ExchangeCodeForTokenView(APIView):
-    def post(self, request, *args, **kwargs):
-        code = request.data.get('code')
-        if not code:
-            return Response({"message": "Authorization code is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Exchange code for access_token and id_token
-        token_url = 'https://oauth2.googleapis.com/access_token'
-        data = {
-            'code': code,
-            'client_id': '42369673655-due6b9fpdl4nf39c438p7mpd55t3hav0.apps.googleusercontent.com',
-            'client_secret': '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',
-            'redirect_uri': 'http://localhost:5173',  # This should match your frontend's redirect URI
-            'grant_type': 'authorization_code'
-        }
-        token_response = requests.post(token_url, data=data)
-        token_data = token_response.json()
-
-        access_token = token_data.get('access_token')
-        id_token = token_data.get('id_token')
-
-        if not access_token or not id_token:
-            return Response({"message": "Failed to obtain access token and ID token"}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Handle the tokens as needed (e.g., store in database, return to frontend)
-        return Response({"access_token": access_token, "id_token": id_token}, status=status.HTTP_200_OK)
-    
-
-
-# this is it 
-
-# import jwt
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import status
+import jwt
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
 
 # from google.oauth2 import id_token
 # from google.auth.transport import requests
+# class ExchangeCodeForGoogleTokenView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         jwt_token = request.data.get('token')
+#         if not jwt_token:
+#             return Response({"status": "error", "message": "JWT token is required"}, status=status.HTTP_400_BAD_REQUEST)
 
+#         try:
+#             # Specify the CLIENT_ID of the app that accesses the backend:
+#             CLIENT_ID = '351883273519-v2j57mujr367f53r1hgl4oei4gus69q2.apps.googleusercontent.com'
+#             idinfo = id_token.verify_oauth2_token(jwt_token, requests.Request(), CLIENT_ID)
 
+#             # ID token is valid. Extract necessary information.
+#             user_id = idinfo['sub']
+#             email = idinfo['email']
+#             name = idinfo['name']
+#             googleavatar = idinfo.get('picture')  # Get the avatar URL if available
+
+#             # Check if a user with the email already exists
+#             try:
+#                 user = User.objects.get(email=email)
+#                 created = False
+#             except User.DoesNotExist:
+#                 user = User.objects.create(username=user_id, email=email, name=name, googleavatar=googleavatar)
+#                 created = True
+
+#             if not created and user.googleavatar != googleavatar:
+#                 user.googleavatar = googleavatar
+#                 user.save()
+
+#             # Generate access and refresh tokens
+#             refresh = RefreshToken.for_user(user)
+#             access_token = str(refresh.access_token)
+#             refresh_token = str(refresh)
+
+#             # Serialize the user
+#             user_data = UserSerializer(user).data
+
+#             # Return serialized user info along with the tokens and a success message
+#             return Response({
+#                 'user': user_data,
+#                 'access_token': access_token,
+#                 'refresh_token': refresh_token,
+#                 'message': 'Login Successfully!',
+#                 'success': True
+#             }, status=status.HTTP_200_OK)
+
+#         except ValueError as e:
+#             # Invalid token
+#             return Response({"status": "error", "message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+#         except Exception as e:
+#             # Catch any other exceptions and provide detailed error
+#             return Response({"status": "error", "message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+            
+            
 # class ExchangeCodeForTokenView(APIView):
 #     def post(self, request, *args, **kwargs):
 #         jwt_token = request.data.get('token')
@@ -569,22 +556,24 @@ class ExchangeCodeForTokenView(APIView):
 #             # Specify the CLIENT_ID of the app that accesses the backend:
 #             CLIENT_ID = '351883273519-v2j57mujr367f53r1hgl4oei4gus69q2.apps.googleusercontent.com'
 #             idinfo = id_token.verify_oauth2_token(jwt_token, requests.Request(), CLIENT_ID)
-            
+
 #             # ID token is valid. Extract necessary information.
 #             user_id = idinfo['sub']
 #             email = idinfo['email']
 #             name = idinfo['name']
-#             avatar = idinfo.get('picture')  # Get the avatar URL if available
+#             googleavatar = idinfo.get('picture')  # Get the avatar URL if available
 
-#             # Create or update the user
-#             user, created = User.objects.get_or_create(username=user_id, defaults={
-#                 'email': email,
-#                 'first_name': name,
-#                 'avatar': avatar,
-#             })
-            
-#             if not created and user.avatar != avatar:
-#                 user.avatar = avatar
+#             # Check if a user with the email already exists
+#             try:
+#                 user = User.objects.get(email=email)
+#                 created = False
+#             except User.DoesNotExist:
+#                 user = User.objects.create(username=user_id, email=email, name=name, googleavatar=googleavatar)
+#                 created = True
+
+#             # Update avatar if needed
+#             if not created and user.googleavatar != googleavatar:
+#                 user.googleavatar = googleavatar
 #                 user.save()
 
 #             # Generate access and refresh tokens
@@ -597,7 +586,7 @@ class ExchangeCodeForTokenView(APIView):
 #                 'user_id': user_id,
 #                 'email': email,
 #                 'name': name,
-#                 'avatar': avatar,
+#                 'googleavatar': googleavatar,
 #             }
 
 #             return Response({
@@ -606,40 +595,65 @@ class ExchangeCodeForTokenView(APIView):
 #                 "access_token": access_token,
 #                 "refresh_token": refresh_token
 #             }, status=status.HTTP_200_OK)
-        
+
 #         except ValueError as e:
 #             # Invalid token
 #             return Response({"status": "error", "message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 #         except Exception as e:
 #             # Catch any other exceptions and provide detailed error
 #             return Response({"status": "error", "message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-# goolgle may be help  this is it 
 # class ExchangeCodeForTokenView(APIView):
 #     def post(self, request, *args, **kwargs):
-#         code = request.data.get('code')
-#         if not code:
-#             return Response({"message": "Authorization code is required"}, status=status.HTTP_400_BAD_REQUEST)
+#         jwt_token = request.data.get('token')
+#         if not jwt_token:
+#             return Response({"message": "JWT token is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-#         # Exchange code for access_token and id_token
-#         token_url = 'https://oauth2.googleapis.com/access_token'
-#         data = {
-#             'code': code,
-#             'client_id': 'YOUR_GOOGLE_CLIENT_ID',
-#             'client_secret': 'YOUR_GOOGLE_CLIENT_SECRET',
-#             'redirect_uri': 'http://localhost:3000',  # This should match your frontend's redirect URI
-#             'grant_type': 'authorization_code'
-#         }
-#         token_response = requests.post(token_url, data=data)
-#         token_data = token_response.json()
+#         try:
+#             # Decode the JWT token. You might need to specify the algorithm used for encoding.
+#             decoded_token = jwt.decode(jwt_token, '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', algorithms=['HS256'])
+            
+#             # Extract necessary information from the token
+#             user_info = {
+#                 'user_id': decoded_token.get('sub'),
+#                 'email': decoded_token.get('email'),
+#                 'name': decoded_token.get('name')
+#             }
+            
+#             # Handle the user info as needed (e.g., store in database, return to frontend)
+#             return Response({"user_info": user_info}, status=status.HTTP_200_OK)
+        
+#         except jwt.ExpiredSignatureError:
+#             return Response({"message": "Token has expired"}, status=status.HTTP_400_BAD_REQUEST)
+#         except jwt.InvalidTokenError:
+#             return Response({"message": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
 
-#         access_token = token_data.get('access_token')
-#         id_token = token_data.get('id_token')
+# goolgle may be help 
+# class ExchangeCodeForTokenView(APIView):
+    # def post(self, request, *args, **kwargs):
+    #     code = request.data.get('code')
+    #     if not code:
+    #         return Response({"message": "Authorization code is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-#         if not access_token or not id_token:
-#             return Response({"message": "Failed to obtain access token and ID token"}, status=status.HTTP_400_BAD_REQUEST)
+    #     # Exchange code for access_token and id_token
+    #     token_url = 'https://oauth2.googleapis.com/access_token'
+    #     data = {
+    #         'code': code,
+    #         'client_id': 'YOUR_GOOGLE_CLIENT_ID',
+    #         'client_secret': 'YOUR_GOOGLE_CLIENT_SECRET',
+    #         'redirect_uri': 'http://localhost:3000',  # This should match your frontend's redirect URI
+    #         'grant_type': 'authorization_code'
+    #     }
+    #     token_response = requests.post(token_url, data=data)
+    #     token_data = token_response.json()
 
-#         # Handle the tokens as needed (e.g., store in database, return to frontend)
-#         return Response({"access_token": access_token, "id_token": id_token}, status=status.HTTP_200_OK)
+    #     access_token = token_data.get('access_token')
+    #     id_token = token_data.get('id_token')
+
+    #     if not access_token or not id_token:
+    #         return Response({"message": "Failed to obtain access token and ID token"}, status=status.HTTP_400_BAD_REQUEST)
+
+    #     # Handle the tokens as needed (e.g., store in database, return to frontend)
+    #     return Response({"access_token": access_token, "id_token": id_token}, status=status.HTTP_200_OK)
 
 
 from rest_framework import generics, status
