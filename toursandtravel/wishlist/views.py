@@ -12,15 +12,17 @@ class WishlistCreate(generics.CreateAPIView):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
 
-    def perform_create(self, serializer):
+    def create(self, request, *args, **kwargs):
         try:
-            serializer.save(user=self.request.user)
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(user=request.user)
             return Response({
                 "message": "Wishlist created successfully."
             }, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({
-                "message": "Failed to create wishlist.", 
+                "message": "Failed to create wishlist.",
                 "error": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
 
