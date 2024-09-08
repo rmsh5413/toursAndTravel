@@ -45,6 +45,7 @@ urlpatterns = [
     path('api/v1/user/',include('useraccounts.urls')),
     path('api/v1/packages/',include('packages.urls')),
     path('api/v1/blog/',include('blog.urls')),
+    path('api/v1/aboutus/',include('aboutus.urls')),
     #auth
     # path('accounts/', include('allauth.urls')),
     # path('auth/', include('dj_rest_auth.urls')),

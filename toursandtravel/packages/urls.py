@@ -18,6 +18,13 @@ urlpatterns = [
     path('itinerary', HolidaysPackagesItineraryView.as_view(), name='category_delete'),
     # path('itinerary/<uuid:pk>/', HolidaysPackagesItineraryView.as_view(), name='itinerary-update'),
 
+    # HolidaysPackagesType
+    path('type/create/', HolidaysPackagesTypeCreate.as_view(), name='create_type'),
+    path('type/list/', HolidaysPackagesTypeList.as_view(), name='type_list'),
+    path('type/detail/<slug:slug>/', HolidaysPackagesTypeDetail.as_view(), name='type_detail'),
+    path('type/update/<uuid:pk>/', HolidaysPackagesTypeUpdate.as_view(), name='type_update'),
+    path('type/delete/<uuid:pk>/', HolidaysPackagesTypeDelete.as_view(), name='type_delete'),
+
 
 
 ]

@@ -891,6 +891,11 @@ class UpdateHolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
         return instance
 
 
+class HolidaysPackagesTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesType
+        fields = '__all__'
+
 # class UpdateHolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
 #     accommodation = PackagesAccommodationSerializer(many=True, required=False)
 #     meals = PackagesMealsSerializer(many=True, required=False)
