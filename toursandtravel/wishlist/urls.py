@@ -8,5 +8,4 @@ urlpatterns = [
     path('detail/<uuid:pk>/', WishlistDetail.as_view(), name='wishlist-detail'),
     path('update/<uuid:pk>/', WishlistUpdate.as_view(), name='wishlist-update'),
     path('delete/<uuid:pk>/', WishlistDelete.as_view(), name='wishlist-delete'),
-
 ]
