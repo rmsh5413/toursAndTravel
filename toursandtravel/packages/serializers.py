@@ -62,6 +62,12 @@ class HolidaysPackagesFaqSerializer(serializers.ModelSerializer):
         model = HolidaysPackagesFaq
         fields = ['id', 'ordering', 'question', 'answer']
 
+
+class HolidaysPackagesCommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesComments
+        fields = ['__all__']  
+
 class HolidaysPackagesSerializer(serializers.ModelSerializer):
     faqs = HolidaysPackagesFaqSerializer(many=True, required=False)
     highlights = HolidaysPackagesHighlightsSerializer(many=True, required=False)
