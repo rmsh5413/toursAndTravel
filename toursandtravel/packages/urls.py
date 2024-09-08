@@ -61,4 +61,7 @@ urlpatterns = [
     # HolidaysPackagesGalleryDelete
     path('gallery/delete/<uuid:pk>/', HolidaysPackagesGalleryDelete.as_view(), name='gallery_delete'),
 
+    # HolidaysPackagesVideosDelete
+    path('videos/delete/<uuid:pk>/', HolidaysPackagesVideosDelete.as_view(), name='videos_delete'),
+
 ]
