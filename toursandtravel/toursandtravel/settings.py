@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-9k#xotvhljb+(c)*d#at!ct6qvugx2dxs@i12rwu*7m@owm%$b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.71']
 
 
 # Application definition
@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'itinerary',
     'blog',
     'aboutus',
+    'booking',
+    'wishlist',
+
 
        # third party
     'corsheaders',
@@ -103,25 +106,25 @@ CORS_ALLOW_CREDENTIALS = True
 SESSION_COOKIE_HTTPONLY = False
 # SESSION_COOKIE_SECURE = False
 
-SESSION_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SECURE = True  # Set to True for HTTPS deployment
-CSRF_COOKIE_SAMESITE = 'None'
-CSRF_COOKIE_SECURE = True  # Set to True for HTTPS deployment
+# SESSION_COOKIE_SAMESITE = 'None'
+# SESSION_COOKIE_SECURE = True  # Set to True for HTTPS deployment
+# CSRF_COOKIE_SAMESITE = 'None'
+# CSRF_COOKIE_SECURE = True  # Set to True for HTTPS deployment
 
-CSRF_COOKIE_HTTPONLY = False
-# CSRF_COOKIE_SECURE = False
+# CSRF_COOKIE_HTTPONLY = False
+# # CSRF_COOKIE_SECURE = False
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://192.168.1.126:8000',
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:5173',
+#     'http://localhost:3000',
+#     'http://192.168.1.126:8000',
    
-]
+# ]
 
-SESSION_COOKIE_AGE = 1200  # 20 minutes
-SESSION_SAVE_EVERY_REQUEST = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Ensure this is set
+# SESSION_COOKIE_AGE = 1200  # 20 minutes
+# SESSION_SAVE_EVERY_REQUEST = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# # SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Ensure this is set
 
 
 MIDDLEWARE = [
