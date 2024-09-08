@@ -322,3 +322,29 @@ class HolidaysPackagesTypeDelete(generics.DestroyAPIView):
                 "error": "Failed to delete type", 
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+
+
+
+# views.py
+
+from rest_framework import generics
+from .models import HolidaysPackagesType
+from .serializers import HolidaysPackagesTypeSerializer
+
+class HolidaysPackagesTypeListView(generics.ListAPIView):
+    queryset = HolidaysPackagesType.objects.all().prefetch_related('categories')
+    serializer_class = HolidaysPackagesTypeSerializer
+
+
+# views.py
+
+from rest_framework import generics
+from .models import HolidaysPackages
+from .serializers import HolidaysPackagesSerializer
+
+class HolidaysPackagesListView(generics.ListAPIView):
+    queryset = HolidaysPackages.objects.all()
+    serializer_class = HolidaysPackagesListSerializer

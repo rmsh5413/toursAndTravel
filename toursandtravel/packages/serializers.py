@@ -972,3 +972,46 @@ class HolidaysPackagesTypeSerializer(serializers.ModelSerializer):
 #                 PackagesActivities.objects.create(itinerary=instance, **activity_data)
 
 #         return instance
+
+
+
+
+
+
+
+
+# serializers.py
+
+from rest_framework import serializers
+from .models import HolidaysPackagesType, HolidaysPackagesCategory
+
+class HolidaysPackagesCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesCategory
+        fields = ['id', 'name', 'ordering', 'slug', 'image']
+
+class HolidaysPackagesTypeSerializer(serializers.ModelSerializer):
+    categories = HolidaysPackagesCategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = HolidaysPackagesType
+        fields = ['id', 'name', 'ordering', 'slug', 'image', 'categories']
+
+
+
+# serializers.py
+
+from .models import HolidaysPackages
+
+class HolidaysPackagesListSerializer(serializers.ModelSerializer):
+    packagetype = HolidaysPackagesTypeSerializer(read_only=True)
+    category = HolidaysPackagesCategorySerializer(read_only=True)
+
+    class Meta:
+        model = HolidaysPackages
+        fields = [
+            'id', 'country', 'city', 'packagetype', 'category', 'ordering', 'name', 
+            'slug', 'description', 'image', 'price', 'destination', 'duration', 
+            'start_point', 'end_point', 'group_size', 'season', 'meals', 
+            'select_package_type', 'accommodations', 'activity_duration'
+        ]

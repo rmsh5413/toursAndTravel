@@ -46,6 +46,9 @@ class HolidaysPackagesType(BaseModel):
     
     class Meta:
         ordering = ['ordering']
+
+
+        
     # existing code
 class HolidaysPackagesCategory(BaseModel):
     type = models.ForeignKey(HolidaysPackagesType, on_delete=models.CASCADE, related_name='categories', null=True, blank=True)
