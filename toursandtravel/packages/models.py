@@ -48,7 +48,7 @@ class HolidaysPackagesType(BaseModel):
         ordering = ['ordering']
 
 
-        
+
     # existing code
 class HolidaysPackagesCategory(BaseModel):
     type = models.ForeignKey(HolidaysPackagesType, on_delete=models.CASCADE, related_name='categories', null=True, blank=True)
@@ -78,7 +78,8 @@ class Countries(BaseModel):
             ('Oceania', 'Oceania'),
             ('Antarctica', 'Antarctica')
         )
-
+    
+    select_package_type=models.CharField(max_length=255, choices=INTERNATIONALORDOMESTIC,default='International')
     continent = models.CharField(max_length=255, choices=CONTINENTS)
     name = models.CharField(max_length=255)
     ordering = models.PositiveBigIntegerField()

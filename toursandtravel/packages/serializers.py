@@ -1015,3 +1015,76 @@ class HolidaysPackagesListSerializer(serializers.ModelSerializer):
             'start_point', 'end_point', 'group_size', 'season', 'meals', 
             'select_package_type', 'accommodations', 'activity_duration'
         ]
+
+
+
+
+
+# serializers.py
+
+from rest_framework import serializers
+from .models import Cities
+
+class CitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cities
+        fields = ['id', 'name', 'ordering', 'slug', 'image']
+
+
+# serializers.py
+
+from .models import Countries
+
+class CountriesSerializer(serializers.ModelSerializer):
+    cities = CitiesSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Countries
+        fields = ['id', 'continent', 'name', 'ordering', 'slug', 'image', 'cities']
+
+
+
+class HolidaysPackagesCitySerializer(serializers.ModelSerializer):
+    country = CountriesSerializer(read_only=True)
+    city = CitiesSerializer(read_only=True)
+    # packagetype = HolidaysPackagesTypeSerializer(read_only=True)
+    # category = HolidaysPackagesCategorySerializer(read_only=True)
+
+    class Meta:
+        model = HolidaysPackages
+        fields = ['id', 'country', 'city', 'packagetype', 'category', 'ordering', 'name', 'slug', 'description', 'image', 'price', 'destination', 'duration', 'start_point', 'end_point', 'group_size', 'season', 'meals', 'select_package_type', 'accommodations', 'activity_duration', 'max_altitude', 'youtubeUrl', 'mapUrl', 'pdfManual', 'description', 'equipment']
+
+
+class HolidaysPackagesDatesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesDates
+        fields = ['start_date', 'end_date']
+
+
+from rest_framework import generics
+from rest_framework.response import Response
+from .models import HolidaysPackagesDates
+from .serializers import HolidaysPackagesDatesSerializer
+from django.utils.dateparse import parse_date
+from datetime import datetime
+
+class PackageDatesView(generics.GenericAPIView):
+    serializer_class = HolidaysPackagesDatesSerializer
+
+    def get(self, request, *args, **kwargs):
+        package_id = self.kwargs.get('package_id')
+        year = int(request.query_params.get('year'))
+        month = int(request.query_params.get('month'))
+
+        # Ensure the package exists
+        try:
+            package_dates = HolidaysPackagesDates.objects.filter(
+                package_id=package_id,
+                start_date__year=year,
+                start_date__month=month
+            )
+        except HolidaysPackagesDates.DoesNotExist:
+            return Response({'error': 'No dates found for the specified package and time'}, status=404)
+
+        serializer = self.get_serializer(package_dates, many=True)
+        return Response(serializer.data)

@@ -26,8 +26,55 @@ urlpatterns = [
     path('type/delete/<uuid:pk>/', HolidaysPackagesTypeDelete.as_view(), name='type_delete'),
 
 
+    # HolidaysPackages type and category
     path('holiday-packages/types/', HolidaysPackagesTypeListView.as_view(), name='holiday-packages-types-list'),
+
+    # holicays packages list -type-category
     path('holiday-all-type-category-packages/', HolidaysPackagesListView.as_view(), name='holiday-packages-list'),
+
+    # get packages by category slug
+    path('holiday-packages/category/<slug:slug>/', HolidaysPackagesByCategoryView.as_view(), name='holiday-packages-by-category'),
+
+    # get packages by type slug
+    path('holiday-packages/type/<slug:slug>/', HolidaysPackagesByTypeView.as_view(), name='holiday-packages-by-type'),
+
+
+    # get packages by packages slug
+    path('holiday-packages/detail/<slug:slug>/', HolidaysPackagesDetailView.as_view(), name='holiday-packages-detail'),
+
+
+    path('categories/type/<slug:slug>/', CategoriesByTypeView.as_view(), name='categories-by-type'),
+
+
+
+
+    path('countries-and-cities/', CountriesListView.as_view(), name='countries-list'),
+
+    path('country-and-cities', PackagesListByCountryAndCity.as_view(), name='cities-list'),
+
+    path('holiday-packages/country/<slug:slug>/', HolidaysPackagesByCountryView.as_view(), name='holiday-packages-by-country'),
+
+    path('holiday-packages/city/<slug:slug>/', HolidaysPackagesByCityView.as_view(), name='holiday-packages-by-city'),
+
+
+    path('cities/country/<slug:slug>/', CitiesByCountryView.as_view(), name='cities-by-country'),
+
+
+    path('holiday-packages/filter/', HolidayPackagesInternaionalListView.as_view(), name='holiday-packages-list'),
+
+    path('internation-domestic-countries-cities/', CountriesandCitiesListView.as_view(), name='countries-list'),
+
+
+    path('packages/<uuid:package_id>/dates/', PackageDatesView.as_view(), name='package-dates'),
+
+
+
+
+
+
+
+
+
 
 
 
