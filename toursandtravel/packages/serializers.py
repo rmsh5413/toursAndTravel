@@ -983,7 +983,7 @@ class HolidaysPackagesTypeSerializer(serializers.ModelSerializer):
 #         for activity_data in activities_data:
 #             activity_id = activity_data.get('id')
 #             if activity_id:
-#                 activity = PackagesActivities.objects.get(id=activity_id, itinerary=instance)
+#                 activity = PackagesActivities.objects.get(id=activity_id, itinerary=instance)HolidaysPackagesDatesSerializer
 #                 activity.title = activity_data.get('title', activity.title)
 #                 activity.save()
 #             else:
@@ -1077,6 +1077,7 @@ class HolidaysPackagesDatesSerializer(serializers.ModelSerializer):
     class Meta:
         model = HolidaysPackagesDates
         fields = ['start_date', 'end_date']
+        ref_name = 'HolidaysPackagesDatesSerializer_v1' 
 
 
 from rest_framework import generics
