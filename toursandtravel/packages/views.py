@@ -322,3 +322,42 @@ class HolidaysPackagesTypeDelete(generics.DestroyAPIView):
                 "error": "Failed to delete type", 
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+class PackagesAccommodationDelete(generics.DestroyAPIView):
+    queryset = PackagesAccommodation.objects.all()
+    serializer_class = PackagesAccommodationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response({
+                "success": "Accommodation deleted successfully"
+            }, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({
+                "error": "Failed to delete accommodation", 
+                "message": str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class PackagesMealsDelete(generics.DestroyAPIView):
+    queryset = PackagesMeals.objects.all()
+    serializer_class = PackagesMealsSerializer
+    permission_classes = [IsAuthenticated]
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response({
+                "success": "Meals deleted successfully"
+            }, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({
+                "error": "Failed to delete meals", 
+                "message": str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)

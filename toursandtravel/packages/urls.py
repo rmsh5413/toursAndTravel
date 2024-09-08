@@ -25,6 +25,12 @@ urlpatterns = [
     path('type/update/<uuid:pk>/', HolidaysPackagesTypeUpdate.as_view(), name='type_update'),
     path('type/delete/<uuid:pk>/', HolidaysPackagesTypeDelete.as_view(), name='type_delete'),
 
+    # PackagesAccommodationDelete
+    path('accomondation/delete/<uuid:pk>/', PackagesAccommodationDelete.as_view(), name='accomondation_delete'),
+
+    # PackagesMealsDelete
+    path('meals/delete/<uuid:pk>/', PackagesMealsDelete.as_view(), name='meals_delete'),
+
 
 
 ]

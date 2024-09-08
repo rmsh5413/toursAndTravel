@@ -477,15 +477,15 @@ from .models import (
     PackagesActivities
 )
 
-# class PackagesAccommodationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = PackagesAccommodation
-#         fields = ['id', 'title']
+class PackagesAccommodationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackagesAccommodation
+        fields = ['__all__']
 
-# class PackagesMealsSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = PackagesMeals
-#         fields = ['id', 'title']
+class PackagesMealsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackagesMeals
+        fields = ['__all__']
 
 # class PackagesActivitiesSerializer(serializers.ModelSerializer):
 #     class Meta:
