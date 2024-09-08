@@ -361,3 +361,23 @@ class PackagesMealsDelete(generics.DestroyAPIView):
                 "error": "Failed to delete meals", 
                 "message": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+class PackagesActivitiesDelete(generics.DestroyAPIView):
+    queryset = PackagesActivities.objects.all()
+    serializer_class = PackagesActivitiesSerializer
+    permission_classes = [IsAuthenticated]
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response({
+                "success": "Activities deleted successfully"
+            }, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({
+                "error": "Failed to delete activities", 
+                "message": str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)

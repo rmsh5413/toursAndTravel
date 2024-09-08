@@ -31,6 +31,9 @@ urlpatterns = [
     # PackagesMealsDelete
     path('meals/delete/<uuid:pk>/', PackagesMealsDelete.as_view(), name='meals_delete'),
 
+    # PackagesActivitiesDelete
+    path('activities/delete/<uuid:pk>/', PackagesActivitiesDelete.as_view(), name='activities_delete'),
+
 
 
 ]
