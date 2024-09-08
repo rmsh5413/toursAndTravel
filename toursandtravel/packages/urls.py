@@ -70,7 +70,44 @@ urlpatterns = [
     path('packages/<uuid:package_id>/dates/', PackageDatesView.as_view(), name='package-dates'),
 
 
+     # PackagesAccommodationDelete
+    path('accomondation/delete/<uuid:pk>/', PackagesAccommodationDelete.as_view(), name='accomondation_delete'),
 
+    # PackagesMealsDelete
+    path('meals/delete/<uuid:pk>/', PackagesMealsDelete.as_view(), name='meals_delete'),
+
+    # PackagesActivitiesDelete
+    path('activities/delete/<uuid:pk>/', PackagesActivitiesDelete.as_view(), name='activities_delete'),
+
+    # HolidaysPackagesInclusionDelete
+    path('inclusion/delete/<uuid:pk>/', HolidaysPackagesInclusionDelete.as_view(), name='inclusion_delete'),
+
+    # HolidaysPackagesExclusionDelete
+    path('exclusion/delete/<uuid:pk>/', HolidaysPackagesExclusionDelete.as_view(), name='exclusion_delete'),
+
+    # HolidaysPackagesNoticeDelete
+    path('notice/delete/<uuid:pk>/', HolidaysPackagesNoticeDelete.as_view(), name='notice_delete'),
+
+    # HolidaysPackagesDates
+    path('dates/delete/<uuid:pk>/', HolidaysPackagesDatesDelete.as_view(), name='dates_delete'),
+
+    # HolidaysPackagesFaqDelete
+    path('faq/delete/<uuid:pk>/', HolidaysPackagesFaqDelete.as_view(), name='faq_delete'),
+
+    # HolidaysPackagesComments
+    path('comments/create/', HolidaysPackagesCommentsCreate.as_view(), name='comments_create'),
+    path('comments/list/', HolidaysPackagesCommentsList.as_view(), name='comments_list'),
+    path('comments/detail/<uuid:pk>/', HolidaysPackagesCommentsDetail.as_view(), name='comments_detail'),
+    path('comments/delete/<uuid:pk>/', HolidaysPackagesCommentsDelete.as_view(), name='comments_delete'),
+
+    # HolidaysPackagesHighlightsDelete
+    path('highlights/delete/<uuid:pk>/', HolidaysPackagesHighlightsDelete.as_view(), name='highlights_delete'),
+
+    # HolidaysPackagesGalleryDelete
+    path('gallery/delete/<uuid:pk>/', HolidaysPackagesGalleryDelete.as_view(), name='gallery_delete'),
+
+    # HolidaysPackagesVideosDelete
+    path('videos/delete/<uuid:pk>/', HolidaysPackagesVideosDelete.as_view(), name='videos_delete'),
 
 
 
