@@ -40,4 +40,7 @@ urlpatterns = [
     # HolidaysPackagesExclusionDelete
     path('exclusion/delete/<uuid:pk>/', HolidaysPackagesExclusionDelete.as_view(), name='exclusion_delete'),
 
+    # HolidaysPackagesNoticeDelete
+    path('notice/delete/<uuid:pk>/', HolidaysPackagesNoticeDelete.as_view(), name='notice_delete'),
+
 ]
