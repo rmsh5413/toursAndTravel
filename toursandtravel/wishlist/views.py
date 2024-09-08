@@ -31,6 +31,7 @@ class WishlistCreate(generics.CreateAPIView):
 class WishlistList(generics.ListAPIView):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
+    permission_classes = [IsAuthenticated]
 
 
     def list(self, request, *args, **kwargs):

@@ -13,6 +13,6 @@ class WishlistSerializer(serializers.ModelSerializer):
     wishlistpackages = WishlistPackagesSerializer(many=True, read_only=True)
     class Meta:
         model = Wishlist
-        fields = ['user', 'wishlistpackages']
+        fields = ['user', 'id', 'wishlistpackages']
 
 
