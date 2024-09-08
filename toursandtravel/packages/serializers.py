@@ -56,6 +56,24 @@ class HolidaysPackagesDatesSerializer(serializers.ModelSerializer):
         model = HolidaysPackagesDates
         fields = ['id', 'start_date', 'end_date']
 
+
+class HolidaysPackagesFaqSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesFaq
+        fields = ['id', 'ordering', 'question', 'answer']
+
+
+class HolidaysPackagesCommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesComments
+        fields = ['id', 'comment' ]  
+
+
+class HolidaysPackagesHighlightsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HolidaysPackagesHighlights
+        fields = ['id', 'ordering', 'detail']
+
 class HolidaysPackagesSerializer(serializers.ModelSerializer):
     faqs = HolidaysPackagesFaqSerializer(many=True, required=False)
     highlights = HolidaysPackagesHighlightsSerializer(many=True, required=False)
@@ -477,20 +495,20 @@ from .models import (
     PackagesActivities
 )
 
-# class PackagesAccommodationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = PackagesAccommodation
-#         fields = ['id', 'title']
+class PackagesAccommodationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackagesAccommodation
+        fields = ['id', 'title']
 
-# class PackagesMealsSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = PackagesMeals
-#         fields = ['id', 'title']
+class PackagesMealsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackagesMeals
+        fields = ['id', 'title']
 
-# class PackagesActivitiesSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = PackagesActivities
-#         fields = ['id', 'title']
+class PackagesActivitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackagesActivities
+        fields = ['id', 'title']
 
 # class HolidaysPackagesItinerarySerializer(serializers.ModelSerializer):
 #     accommodation = PackagesAccommodationSerializer(many=True, required=False)
