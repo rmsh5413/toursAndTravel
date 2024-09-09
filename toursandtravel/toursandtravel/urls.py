@@ -52,6 +52,7 @@ urlpatterns = [
     path('api/v1/comments/',include('comments.urls')),
     path('api/v1/country/',include('country.urls')),
     path('api/v1/itinerary/',include('itinerary.urls')),
+    path('api/v1/packagestype/',include('packagestype.urls')),
     #auth
     # path('accounts/', include('allauth.urls')),
     # path('auth/', include('dj_rest_auth.urls')),
