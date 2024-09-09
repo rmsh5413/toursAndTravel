@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from .models import *
 
+
 # admin.site.register(HolidaysPackagesCategory)
 # admin.site.register(HolidaysPackagesType)
 # admin.site.register(Countries)
@@ -28,11 +29,7 @@ from .models import *
 #     list_display = ['title', 'day', 'ordering', 'is_active']
 #     search_fields = ['title']
 #     list_filter = ['is_active']
-admin.site.register(PackagesAccommodation)
-admin.site.register(PackagesMeals)
-admin.site.register(PackagesActivities)
-admin.site.register(HolidaysPackagesItinerary)
-admin.site.register(HolidaysPackagesGallery)
+
 admin.site.register(HolidaysPackagesCategory)
 admin.site.register(HolidaysPackagesType)
 admin.site.register(Countries)
@@ -42,7 +39,6 @@ admin.site.register(HolidaysPackagesExclusion)
 admin.site.register(HolidaysPackagesNotice)
 admin.site.register(HolidaysPackagesDates)
 admin.site.register(HolidaysPackagesFaq)
-admin.site.register(HolidaysPackagesComments)
 admin.site.register(HolidaysPackagesHighlights)
 # admin.site.register(HolidaysPackagesCategory)
 
