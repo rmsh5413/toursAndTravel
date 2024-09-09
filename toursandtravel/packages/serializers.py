@@ -3,6 +3,7 @@ from .models import *
 from gallery.models import *
 from videos.models import *
 
+from comments.models import HolidaysPackagesComments
 
 
 class HolidaysPackagesCategorySerializer(serializers.ModelSerializer):
