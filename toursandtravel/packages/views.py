@@ -4,14 +4,14 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-
 # Create your views here.
-
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import HolidaysPackagesSerializer
+from rest_framework import generics
+from rest_framework.exceptions import NotFound
+
 
 class HolidaysPackagesCreateView(APIView):
     serializer_class = HolidaysPackagesSerializer
@@ -59,25 +59,6 @@ class HolidaysPackagesDeleteView(generics.DestroyAPIView):
         }, status=status.HTTP_204_NO_CONTENT)
     
 
-
-# from rest_framework import generics
-# from .models import HolidaysPackagesItinerary
-# from .serializers import HolidaysPackagesItinerarySerializer
-
-# class HolidaysPackagesItineraryView(generics.CreateAPIView, generics.UpdateAPIView):
-#     queryset = HolidaysPackagesItinerary.objects.all()
-#     serializer_class = HolidaysPackagesItinerarySerializer
-#     lookup_field = 'pk'
-
-
-
-
-# views.py
-
-from rest_framework import generics
-from .models import HolidaysPackages
-from .serializers import HolidaysPackagesSerializer
-from rest_framework.exceptions import NotFound
 
 
 class HolidaysPackagesListView(generics.ListAPIView):
@@ -128,7 +109,6 @@ class HolidaysPackagesDetailView(generics.RetrieveAPIView):
 
 
 
-from .serializers import CountriesSerializer
 
 class CountriesListView(generics.ListAPIView):
     queryset = Countries.objects.all().prefetch_related('cities')
