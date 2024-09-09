@@ -530,6 +530,7 @@ class CitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cities
         fields = ['id', 'name', 'ordering', 'slug', 'image']
+        ref_name = 'Citie'
 
 
 # serializers.py
@@ -542,6 +543,7 @@ class CountriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Countries
         fields = ['id', 'continent', 'name', 'ordering', 'slug', 'image', 'cities']
+        ref_name = 'Country'
 
 
 

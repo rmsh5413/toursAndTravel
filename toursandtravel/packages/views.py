@@ -220,8 +220,7 @@ class HolidayPackagesInternaionalListView(generics.ListAPIView):
 #         package_type = self.request.query_params.get('type', 'International')  # Default to 'International'
 #         return HolidaysPackages.objects.filter(select_package_type=package_type)
 
-
-class CountriesandCitiesListView(generics.ListAPIView):
+class CountriesandCitiesListView(APIView):
     def get(self, request, *args, **kwargs):
         package_type = request.query_params.get('type', None)
         
@@ -243,9 +242,7 @@ class CountriesandCitiesListView(generics.ListAPIView):
             })
         
         return Response({'detail': 'Invalid type parameter'}, status=400)
-
-
-
+    
 class HolidaysPackagesInclusionDelete(generics.DestroyAPIView):
     queryset = HolidaysPackagesInclusion.objects.all()
     serializer_class = HolidaysPackagesInclusionSerializer
