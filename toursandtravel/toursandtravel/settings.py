@@ -50,6 +50,12 @@ INSTALLED_APPS = [
     'aboutus',
     'booking',
     'wishlist',
+    'gallery',
+    'videos',
+    'packagestype',
+    'comments',
+    'country',
+
 
 
        # third party
