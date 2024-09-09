@@ -47,6 +47,11 @@ urlpatterns = [
     path('api/v1/blog/',include('blog.urls')),
     path('api/v1/aboutus/',include('aboutus.urls')),
     path('api/v1/wishlist/',include('wishlist.urls')),
+    path('api/v1/gallery/',include('gallery.urls')),
+    path('api/v1/videos/',include('videos.urls')),
+    path('api/v1/comments/',include('comments.urls')),
+    path('api/v1/country/',include('country.urls')),
+    path('api/v1/itinerary/',include('itinerary.urls')),
     #auth
     # path('accounts/', include('allauth.urls')),
     # path('auth/', include('dj_rest_auth.urls')),
